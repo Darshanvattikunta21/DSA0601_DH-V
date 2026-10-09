@@ -1,0 +1,10 @@
+# Set 18: Product Inventory Management
+inventory <- data.frame(id = 1:3, product = paste("Product", LETTERS[1:3]), quantity = c(250, 175, 300), price = c(20, 15, 18), category = c("Food", "Home", "Food"))
+category_matrix <- xtabs(quantity ~ product + category, inventory)
+old <- par(mfrow = c(1, 3), mar = c(5, 4, 3, 1))
+barplot(inventory$quantity, names.arg = inventory$product, xlab = "Product", ylab = "Quantity", main = "Available Inventory", col = "steelblue")
+barplot(t(category_matrix), beside = FALSE, xlab = "Product", ylab = "Quantity", main = "Quantity by Category", col = c("tomato", "gold"), legend.text = colnames(category_matrix))
+plot.new(); title("Inventory Data Table")
+text(.05, .9, paste(capture.output(print(inventory, row.names = FALSE)), collapse = "\n"), adj = c(0, 1), family = "mono", cex = .65)
+par(old)
+cat("Product categories are sample assignments because the prompt does not provide categories.\n")

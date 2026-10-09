@@ -1,0 +1,11 @@
+# Set 3: Employee Performance Evaluation
+employees <- data.frame(id = 1:5, department = c("Sales", "HR", "Marketing", "Sales", "HR"), years = c(5, 3, 7, 4, 2), score = c(85, 92, 78, 90, 76))
+old <- par(mfrow = c(1, 3), mar = c(5, 4, 3, 1))
+plot(employees$id, employees$score, type = "b", pch = 19, xaxt = "n", xlab = "Employee ID", ylab = "Performance score", main = "Scores by Employee", col = "steelblue")
+axis(1, at = employees$id, labels = employees$id)
+barplot(table(employees$department), xlab = "Department", ylab = "Employees", main = "Employees by Department", col = "darkseagreen3")
+plot(employees$years, employees$score, pch = 19, xlab = "Years of service", ylab = "Performance score", main = "Service vs Score", col = "tomato")
+abline(lm(score ~ years, data = employees), col = "steelblue", lwd = 2)
+par(old)
+cat("Insight: the five observations do not show a clear positive relationship between years of service and score. Employee ID is used as the available ordering for the score plot.\n")
+print(aggregate(score ~ department, employees, mean))

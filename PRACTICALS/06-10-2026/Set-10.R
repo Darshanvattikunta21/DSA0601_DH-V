@@ -1,0 +1,10 @@
+# Set 10: Survey Responses Analysis
+responses <- data.frame(id = 1:3, Q1 = c("A", "B", "C"), Q2 = c("B", "A", "A"), Q3 = c("C", "D", "B"))
+counts <- sapply(responses[c("Q1", "Q2", "Q3")], function(x) table(factor(x, levels = LETTERS[1:4])))
+old <- par(mfrow = c(1, 3), mar = c(5, 4, 3, 1))
+barplot(counts[, "Q1"], xlab = "Answer", ylab = "Responses", main = "Question 1", col = "steelblue")
+barplot(counts, beside = FALSE, xlab = "Question", ylab = "Responses", main = "Responses by Question", col = c("steelblue", "tomato", "gold", "seagreen3"), legend.text = rownames(counts))
+plot.new(); title("Survey Response Table")
+text(.05, .9, paste(capture.output(print(responses, row.names = FALSE)), collapse = "\n"), adj = c(0, 1), family = "mono", cex = .65)
+par(old)
+print(responses)
